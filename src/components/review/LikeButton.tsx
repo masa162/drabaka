@@ -21,17 +21,6 @@ export default function LikeButton({
   const [error, setError] = useState<string | null>(null);
   const [userSession, setUserSession] = useState<string>('');
 
-  // クライアントサイドでセッションIDを取得
-  useEffect(() => {
-    const sessionId = getUserSession();
-    setUserSession(sessionId);
-    
-    // 初期状態を取得
-    if (sessionId && sessionId !== 'server_session') {
-      loadInitialState(sessionId);
-    }
-  }, [reviewId, loadInitialState]);
-
   const loadInitialState = useCallback(async (sessionId: string) => {
     try {
       const [count, hasLiked] = await Promise.all([
@@ -45,6 +34,17 @@ export default function LikeButton({
       console.error('Error loading initial like state:', error);
     }
   }, [reviewId]);
+
+  // クライアントサイドでセッションIDを取得
+  useEffect(() => {
+    const sessionId = getUserSession();
+    setUserSession(sessionId);
+    
+    // 初期状態を取得
+    if (sessionId && sessionId !== 'server_session') {
+      loadInitialState(sessionId);
+    }
+  }, [reviewId, loadInitialState]);
 
   const handleLikeClick = async () => {
     if (!userSession || userSession === 'server_session') {
