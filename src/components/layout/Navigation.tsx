@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation';
 export default function Navigation() {
   const pathname = usePathname();
 
-  const navItems = [
-    { href: '/' as const, label: '🏠 HOME', exact: true },
-    { href: '/dramas' as const, label: '📺 ドラマ一覧' },
-    { href: '/search' as const, label: '🔍 検索' },
+  const navItems: Array<{ href: string; label: string; exact?: boolean }> = [
+    { href: '/', label: '🏠 HOME', exact: true },
+    { href: '/dramas', label: '📺 ドラマ一覧' },
+    { href: '/search', label: '🔍 検索' },
   ];
 
   return (
