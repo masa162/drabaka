@@ -40,7 +40,7 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
         drama_id: dramaId,
         nickname: formData.nickname.trim(),
         rating: formData.rating,
-        comment: formData.comment.trim() || null
+        comment: formData.comment.trim() || undefined
       };
 
       await ReviewService.create(reviewData);
