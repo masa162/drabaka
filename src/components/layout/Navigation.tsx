@@ -7,9 +7,9 @@ export default function Navigation() {
   const pathname = usePathname();
 
   const navItems = [
-    { href: '/', label: '🏠 HOME', exact: true },
-    { href: '/dramas', label: '📺 ドラマ一覧' },
-    { href: '/search', label: '🔍 検索' },
+    { href: '/' as const, label: '🏠 HOME', exact: true },
+    { href: '/dramas' as const, label: '📺 ドラマ一覧' },
+    { href: '/search' as const, label: '🔍 検索' },
   ];
 
   return (

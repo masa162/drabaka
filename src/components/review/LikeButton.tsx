@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { LikeService } from '@/lib/supabase/likes';
 import { getUserSession } from '@/lib/utils/session';
 
@@ -30,9 +30,9 @@ export default function LikeButton({
     if (sessionId && sessionId !== 'server_session') {
       loadInitialState(sessionId);
     }
-  }, [reviewId]);
+  }, [reviewId, loadInitialState]);
 
-  const loadInitialState = async (sessionId: string) => {
+  const loadInitialState = useCallback(async (sessionId: string) => {
     try {
       const [count, hasLiked] = await Promise.all([
         LikeService.getLikeCount(reviewId),
@@ -44,7 +44,7 @@ export default function LikeButton({
     } catch (error) {
       console.error('Error loading initial like state:', error);
     }
-  };
+  }, [reviewId]);
 
   const handleLikeClick = async () => {
     if (!userSession || userSession === 'server_session') {
