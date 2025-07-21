@@ -1,0 +1,444 @@
+/* ========================================
+   ドラマバカ一代 v2 グローバルCSS
+   2000年代風レトロデザイン完全再現
+======================================== */
+
+/* ベースリセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS変数定義 */
+:root {
+  /* メインカラー */
+  --retro-orange: #ff6600;
+  --retro-blue: #0066cc;
+  --retro-red: #ff0000;
+  --retro-green: #009900;
+  --retro-yellow: #ffff00;
+  
+  /* ベースカラー */
+  --retro-gray: #f0f0f0;
+  --retro-white: #ffffff;
+  --retro-black: #000000;
+  --retro-gray-dark: #666666;
+  
+  /* ボーダー・区切り線 */
+  --border-light: #cccccc;
+  --border-dark: #999999;
+  
+  /* グラデーション */
+  --gradient-header: linear-gradient(to bottom, #ff6600, #ff3300);
+  --gradient-button: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  --gradient-active: linear-gradient(to bottom, #0066cc, #004499);
+  
+  /* フォントサイズ階層 */
+  --font-size-xl: 16px;
+  --font-size-l: 14px;
+  --font-size-m: 12px;
+  --font-size-s: 11px;
+  --font-size-xs: 10px;
+  
+  /* 行間 */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-loose: 1.6;
+  
+  /* スペーシング */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+  
+  /* コンテナ幅 */
+  --container-max: 1200px;
+  --content-max: 800px;
+  --sidebar-width: 200px;
+  
+  /* ブレークポイント */
+  --bp-mobile: 768px;
+  --bp-tablet: 1024px;
+}
+
+/* 基本フォント設定 */
+html {
+  font-family: "MS UI Gothic", "Yu Gothic", sans-serif;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-normal);
+}
+
+body {
+  background: var(--retro-gray);
+  color: var(--retro-black);
+  min-height: 100vh;
+}
+
+/* ========================================
+   レトロボタンスタイル
+======================================== */
+.retro-button {
+  background: var(--gradient-button);
+  border: 2px outset #d0d0d0;
+  padding: var(--space-s) var(--space-m);
+  font-family: inherit;
+  font-size: var(--font-size-m);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+.retro-button:active {
+  border-style: inset;
+  background: linear-gradient(to bottom, #c0c0c0, #e0e0e0);
+}
+
+.retro-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.retro-button--primary {
+  background: var(--gradient-active);
+  color: white;
+  border-color: var(--retro-blue);
+}
+
+.retro-button--primary:hover {
+  background: linear-gradient(to bottom, #0055aa, #003377);
+}
+
+.retro-button--danger {
+  background: linear-gradient(to bottom, #ff6666, #ff3333);
+  color: white;
+  border-color: var(--retro-red);
+}
+
+.retro-button--danger:hover {
+  background: linear-gradient(to bottom, #ff5555, #ff2222);
+}
+
+/* ========================================
+   レトロパネル・カード
+======================================== */
+.retro-panel {
+  background: var(--retro-white);
+  border: 2px inset #f0f0f0;
+  margin-bottom: var(--space-m);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.panel-header {
+  background: var(--retro-gray);
+  padding: var(--space-s) var(--space-m);
+  border-bottom: 1px solid var(--border-light);
+  font-weight: bold;
+  font-size: var(--font-size-l);
+}
+
+.panel-content {
+  padding: var(--space-m);
+}
+
+/* ========================================
+   フォーム要素
+======================================== */
+.form-group {
+  margin-bottom: var(--space-m);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-s);
+  font-weight: bold;
+  font-size: var(--font-size-m);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: var(--space-s);
+  border: 2px inset #f0f0f0;
+  font-family: inherit;
+  font-size: var(--font-size-m);
+  background: white;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 2px;
+}
+
+.form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ========================================
+   星評価コンポーネント
+======================================== */
+.star-rating {
+  display: flex;
+  gap: var(--space-s);
+  align-items: center;
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating input:checked + label {
+  opacity: 1;
+}
+
+/* ========================================
+   レイアウトグリッド
+======================================== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-m);
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr var(--sidebar-width);
+  gap: var(--space-l);
+  min-height: calc(100vh - 120px);
+}
+
+.main-content {
+  background: var(--retro-white);
+  border: 2px inset #f0f0f0;
+  padding: var(--space-m);
+}
+
+/* ========================================
+   ヘッダー・ナビゲーション
+======================================== */
+.retro-header {
+  background: var(--gradient-header);
+  padding: var(--space-m);
+  text-align: center;
+  border-bottom: 2px solid var(--retro-red);
+}
+
+.site-title {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+}
+
+.site-subtitle {
+  color: white;
+  margin: var(--space-s) 0 0;
+  font-size: var(--font-size-s);
+  opacity: 0.9;
+}
+
+.retro-nav {
+  background: var(--retro-blue);
+  padding: var(--space-s);
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-m);
+  justify-content: center;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: var(--space-s) var(--space-m);
+  border-radius: 3px;
+  transition: background-color 0.2s;
+  font-size: var(--font-size-m);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.nav-link.active {
+  background: rgba(255,255,255,0.3);
+}
+
+/* ========================================
+   アニメーション
+======================================== */
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { background-color: var(--retro-yellow); }
+  100% { background-color: transparent; }
+}
+
+.sparkle {
+  animation: sparkle 2s infinite;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pulse-highlight {
+  animation: pulse 2s ease-out;
+}
+
+/* ========================================
+   レスポンシブ対応
+======================================== */
+@media (max-width: 1023px) {
+  .layout-grid {
+    grid-template-columns: 1fr var(--sidebar-width);
+  }
+  
+  .left-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-size-xl: 14px;
+    --font-size-l: 12px;
+    --font-size-m: 11px;
+    --font-size-s: 10px;
+  }
+  
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .right-sidebar {
+    display: none;
+  }
+  
+  .nav-list {
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+  
+  .star-rating {
+    justify-content: center;
+  }
+  
+  .container {
+    padding: 0 var(--space-s);
+  }
+}
+
+/* ========================================
+   アクセシビリティ対応
+======================================== */
+.retro-button:focus,
+.form-input:focus,
+.form-textarea:focus,
+.nav-link:focus {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --retro-gray: #e0e0e0;
+    --border-light: #999999;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   ユーティリティクラス
+======================================== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-s { margin-bottom: var(--space-s); }
+.mb-m { margin-bottom: var(--space-m); }
+.mb-l { margin-bottom: var(--space-l); }
+
+.mt-0 { margin-top: 0; }
+.mt-s { margin-top: var(--space-s); }
+.mt-m { margin-top: var(--space-m); }
+.mt-l { margin-top: var(--space-l); }
+
+.p-0 { padding: 0; }
+.p-s { padding: var(--space-s); }
+.p-m { padding: var(--space-m); }
+.p-l { padding: var(--space-l); }
+
+.font-bold { font-weight: bold; }
+.font-normal { font-weight: normal; }
+
+.color-primary { color: var(--retro-blue); }
+.color-danger { color: var(--retro-red); }
+.color-success { color: var(--retro-green); }
+.color-muted { color: var(--retro-gray-dark); }
+
+.bg-white { background: var(--retro-white); }
+.bg-gray { background: var(--retro-gray); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

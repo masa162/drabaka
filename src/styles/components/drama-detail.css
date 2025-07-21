@@ -1,0 +1,366 @@
+/* ドラマ詳細ページ専用スタイル */
+
+/* ドラマ詳細情報 */
+.drama-info .drama-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+}
+
+.drama-title {
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  margin: 0;
+  color: var(--retro-blue);
+}
+
+.drama-status {
+  font-size: var(--font-size-xs);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.drama-status--airing {
+  background: var(--retro-green);
+  color: white;
+}
+
+.drama-status--completed {
+  background: var(--retro-gray-dark);
+  color: white;
+}
+
+.drama-status--upcoming {
+  background: var(--retro-blue);
+  color: white;
+}
+
+/* メタ情報グリッド */
+.drama-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-s);
+}
+
+.meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  background: rgba(240, 240, 240, 0.5);
+  border-radius: 3px;
+}
+
+.meta-label {
+  font-weight: bold;
+  min-width: 80px;
+  color: var(--retro-blue);
+}
+
+.meta-value {
+  flex: 1;
+}
+
+/* あらすじ */
+.synopsis-title {
+  font-weight: bold;
+  color: var(--retro-blue);
+}
+
+.synopsis-content {
+  line-height: var(--line-height-loose);
+  background: rgba(255, 255, 255, 0.8);
+  padding: var(--space-m);
+  border-left: 4px solid var(--retro-blue);
+  border-radius: 0 3px 3px 0;
+}
+
+/* 警告フラグ */
+.warning-flags {
+  background: rgba(255, 255, 0, 0.1);
+  border: 2px dashed var(--retro-yellow);
+  padding: var(--space-m);
+  border-radius: 4px;
+}
+
+.warning-item {
+  margin-bottom: var(--space-s);
+  font-size: var(--font-size-s);
+}
+
+.warning-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 統計情報 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-m);
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.8);
+  padding: var(--space-m);
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
+}
+
+.stat-main {
+  text-align: center;
+}
+
+.stat-title {
+  margin: 0;
+  font-size: var(--font-size-l);
+  color: var(--retro-blue);
+}
+
+.average-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.brain-emojis {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.average-number {
+  font-size: var(--font-size-l);
+  font-weight: bold;
+  color: var(--retro-blue);
+}
+
+.baka-level-badge {
+  padding: var(--space-s) var(--space-m);
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: var(--font-size-s);
+  display: inline-block;
+}
+
+.baka-max {
+  background: linear-gradient(45deg, #ff6600, #ff3300);
+  color: white;
+}
+
+.baka-high {
+  background: linear-gradient(45deg, #ff9900, #ff6600);
+  color: white;
+}
+
+.baka-mid {
+  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  color: black;
+}
+
+.baka-low {
+  background: linear-gradient(45deg, #99cc00, #66cc00);
+  color: black;
+}
+
+.baka-min {
+  background: linear-gradient(45deg, #cccccc, #999999);
+  color: black;
+}
+
+.review-count-display {
+  text-align: center;
+}
+
+.count-number {
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  color: var(--retro-blue);
+  display: block;
+}
+
+.count-label {
+  font-size: var(--font-size-s);
+  color: var(--retro-gray-dark);
+}
+
+.diagnosis-text p {
+  margin-bottom: var(--space-xs);
+}
+
+/* レビューリスト */
+.review-item {
+  position: relative;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+.reviewer-name {
+  font-size: var(--font-size-m);
+}
+
+.review-rating {
+  font-size: 16px;
+}
+
+.rating-text {
+  font-size: var(--font-size-xs);
+}
+
+.review-date {
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+}
+
+.review-text {
+  line-height: var(--line-height-loose);
+  background: rgba(255, 255, 255, 0.5);
+  padding: var(--space-m);
+  border-radius: 4px;
+  border-left: 3px solid var(--retro-blue);
+}
+
+.review-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.like-button {
+  font-size: var(--font-size-s);
+}
+
+.baka-badge {
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+}
+
+.review-divider {
+  border: none;
+  border-top: 1px dotted var(--border-light);
+  margin: var(--space-m) 0;
+}
+
+/* レビュー投稿CTA */
+.review-cta {
+  border-top: 2px solid var(--border-light);
+  padding-top: var(--space-l);
+}
+
+.cta-box {
+  background: rgba(255, 255, 0, 0.1);
+  border: 2px dashed var(--retro-yellow);
+  padding: var(--space-l);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.cta-text {
+  font-size: var(--font-size-l);
+  color: var(--retro-blue);
+}
+
+.cta-subtitle {
+  font-size: var(--font-size-s);
+}
+
+/* 2000年代風マーキー */
+.retro-marquee {
+  background: var(--retro-blue);
+  color: white;
+  padding: var(--space-s);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+  font-size: var(--font-size-s);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1023px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .stat-main {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .drama-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .drama-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .reviewer-info {
+    width: 100%;
+  }
+  
+  .review-date {
+    align-self: flex-start;
+  }
+  
+  .review-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s);
+  }
+  
+  .marquee-content {
+    animation: marquee 10s linear infinite;
+  }
+}
+
+/* ローディング・エラー状態 */
+.no-reviews,
+.no-stats {
+  padding: var(--space-xl);
+  text-align: center;
+  background: rgba(240, 240, 240, 0.5);
+  border-radius: 4px;
+}
+
+/* ユーティリティクラス（ドラマページ専用） */
+.ml-s { margin-left: var(--space-s); }
+.ml-m { margin-left: var(--space-m); }

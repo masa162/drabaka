@@ -1,0 +1,235 @@
+/* レビュー投稿フォーム専用スタイル */
+
+/* フォームCTA */
+.review-form-cta {
+  text-align: center;
+  background: rgba(255, 255, 0, 0.1);
+  border: 2px dashed var(--retro-yellow);
+  padding: var(--space-l);
+  border-radius: 4px;
+}
+
+.cta-message {
+  font-size: var(--font-size-l);
+  color: var(--retro-blue);
+}
+
+.cta-description {
+  line-height: var(--line-height-loose);
+}
+
+.review-form-trigger {
+  padding: var(--space-m) var(--space-xl);
+  font-size: var(--font-size-l);
+}
+
+/* フォーム本体 */
+.review-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-hint {
+  font-size: var(--font-size-xs);
+  color: var(--retro-gray-dark);
+  margin-top: var(--space-xs);
+  margin-bottom: 0;
+}
+
+/* 星評価フォーム */
+.star-rating-form {
+  display: flex;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
+  justify-content: center;
+}
+
+.star-label {
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.star-label:hover {
+  transform: scale(1.1);
+}
+
+.star-label input[type="radio"] {
+  display: none;
+}
+
+.star {
+  font-size: 24px;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  display: inline-block;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star-active {
+  opacity: 1;
+  animation: starGlow 0.3s ease-out;
+}
+
+@keyframes starGlow {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.rating-description {
+  text-align: center;
+  font-weight: bold;
+  color: var(--retro-blue);
+  font-size: var(--font-size-s);
+  min-height: 20px;
+  margin: 0;
+}
+
+/* テキストエリア */
+.review-textarea {
+  min-height: 100px;
+  font-family: inherit;
+  line-height: var(--line-height-normal);
+}
+
+/* フォームアクション */
+.form-actions {
+  display: flex;
+  gap: var(--space-m);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.submit-button {
+  padding: var(--space-m) var(--space-xl);
+  font-weight: bold;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background: var(--retro-gray);
+  border-color: var(--border-dark);
+}
+
+.cancel-button:hover {
+  background: #e0e0e0;
+}
+
+/* エラーメッセージ */
+.error-message {
+  background: rgba(255, 0, 0, 0.1);
+  border: 2px solid var(--retro-red);
+  padding: var(--space-m);
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* 注意事項 */
+.form-notice {
+  background: rgba(240, 240, 240, 0.8);
+  border-left: 4px solid var(--retro-blue);
+  padding: var(--space-m);
+  border-radius: 0 4px 4px 0;
+}
+
+.notice-text {
+  font-size: var(--font-size-s);
+  color: var(--retro-gray-dark);
+  margin: 0;
+}
+
+/* バカ度別の星の色分け */
+.star-rating-form .star-label:nth-child(1) .star-active {
+  filter: grayscale(0.5);
+}
+
+.star-rating-form .star-label:nth-child(2) .star-active {
+  filter: hue-rotate(30deg);
+}
+
+.star-rating-form .star-label:nth-child(3) .star-active {
+  filter: hue-rotate(60deg);
+}
+
+.star-rating-form .star-label:nth-child(4) .star-active {
+  filter: hue-rotate(90deg);
+}
+
+.star-rating-form .star-label:nth-child(5) .star-active {
+  filter: hue-rotate(120deg) brightness(1.2);
+  animation: starGlow 0.3s ease-out, sparkle 2s infinite;
+}
+
+/* ホバー効果 */
+.star-rating-form .star-label:hover .star {
+  opacity: 0.7;
+}
+
+.star-rating-form .star-label:hover ~ .star-label .star {
+  opacity: 0.3;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 767px) {
+  .review-form {
+    max-width: none;
+  }
+  
+  .star-rating-form {
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+  
+  .star {
+    font-size: 20px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .submit-button,
+  .cancel-button {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .review-form-trigger {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+  .star {
+    transition: none;
+  }
+  
+  .star-active {
+    animation: none;
+  }
+  
+  .star-label:hover {
+    transform: none;
+  }
+}
+
+/* フォーカス状態 */
+.star-label:focus-within .star {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 2px;
+  border-radius: 50%;
+}

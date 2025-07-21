@@ -1,0 +1,243 @@
+/* サイドバー専用スタイル（クール風） */
+
+.current-dramas-sidebar {
+  width: 100%;
+}
+
+.drama-schedule {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+}
+
+/* 曜日セクション */
+.day-section {
+  border-bottom: 1px solid var(--border-light);
+  background: var(--retro-white);
+}
+
+.day-section:last-child {
+  border-bottom: none;
+}
+
+.day-section.day-today {
+  background: rgba(255, 255, 0, 0.1);
+  border-left: 3px solid var(--retro-yellow);
+}
+
+/* 曜日ヘッダー */
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-s) var(--space-m);
+  background: var(--retro-gray);
+  border-bottom: 1px solid var(--border-light);
+  font-weight: bold;
+  font-size: var(--font-size-s);
+}
+
+.day-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--retro-blue);
+}
+
+.today-badge {
+  background: var(--retro-red);
+  color: white;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.drama-count {
+  color: var(--retro-gray-dark);
+  font-size: var(--font-size-xs);
+}
+
+/* ドラマリスト */
+.drama-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.drama-item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.drama-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+  border-bottom: 1px dotted var(--border-light);
+  transition: background-color 0.2s;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+.drama-item:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+.drama-item:last-child {
+  border-bottom: none;
+}
+
+/* 時間表示 */
+.drama-time {
+  font-size: var(--font-size-xs);
+  color: var(--retro-red);
+  font-weight: bold;
+  min-width: 35px;
+  text-align: center;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 2px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* ドラマ情報 */
+.drama-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.drama-title-mini {
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  color: var(--retro-blue);
+  line-height: 1.2;
+  margin-bottom: 2px;
+  
+  /* 長いタイトルの省略 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drama-broadcaster-mini {
+  font-size: 9px;
+  color: var(--retro-gray-dark);
+  line-height: 1;
+}
+
+/* 放送なし表示 */
+.no-dramas {
+  padding: var(--space-s) var(--space-m);
+  text-align: center;
+}
+
+.no-dramas-text {
+  font-size: var(--font-size-xs);
+  color: var(--retro-gray-dark);
+  font-style: italic;
+}
+
+/* スケジュール注釈 */
+.schedule-note {
+  margin-top: var(--space-m);
+  padding: var(--space-s);
+  background: rgba(240, 240, 240, 0.8);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.note-text {
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  color: var(--retro-blue);
+  margin: 0 0 2px 0;
+}
+
+.note-subtitle {
+  font-size: 9px;
+  color: var(--retro-gray-dark);
+  margin: 0;
+}
+
+/* スクロールバースタイル */
+.drama-schedule::-webkit-scrollbar,
+.drama-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.drama-schedule::-webkit-scrollbar-track,
+.drama-list::-webkit-scrollbar-track {
+  background: var(--retro-gray);
+}
+
+.drama-schedule::-webkit-scrollbar-thumb,
+.drama-list::-webkit-scrollbar-thumb {
+  background: var(--retro-blue);
+  border-radius: 3px;
+}
+
+.drama-schedule::-webkit-scrollbar-thumb:hover,
+.drama-list::-webkit-scrollbar-thumb:hover {
+  background: #004499;
+}
+
+/* 2000年代風演出 */
+.day-section.day-today .day-header {
+  animation: todayGlow 2s infinite;
+}
+
+@keyframes todayGlow {
+  0%, 100% { background: var(--retro-gray); }
+  50% { background: rgba(255, 255, 0, 0.2); }
+}
+
+/* ホバー時の詳細表示 */
+.drama-item:hover .drama-title-mini {
+  color: var(--retro-red);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1023px) {
+  .current-dramas-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .current-dramas-sidebar {
+    display: none;
+  }
+}
+
+/* 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .day-header {
+    background: #e0e0e0;
+    border-color: #666;
+  }
+  
+  .drama-item:hover {
+    background: #f0f0f0;
+  }
+  
+  .today-badge {
+    background: #000;
+    color: #fff;
+  }
+}
+
+/* アニメーション削減モード対応 */
+@media (prefers-reduced-motion: reduce) {
+  .day-section.day-today .day-header {
+    animation: none;
+  }
+  
+  .drama-item {
+    transition: none;
+  }
+}
