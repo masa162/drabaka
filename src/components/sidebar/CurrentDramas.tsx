@@ -45,13 +45,40 @@ export default function CurrentDramas({ dramasByDay }: CurrentDramasProps) {
   console.log('CurrentDramas - About to return JSX');
   
   return (
-    <div className="current-dramas-sidebar">
-      {/* テスト用デバッグ表示 */}
-      <div style={{background: 'orange', padding: '20px', fontSize: '16px', fontWeight: 'bold'}}>
-        🧪 CurrentDramas Component Test - Total: {Object.values(dramasByDay).flat().length} dramas
+    <div>
+      {/* 最もシンプルなテスト表示 */}
+      <div style={{
+        background: 'orange', 
+        color: 'black',
+        padding: '20px', 
+        fontSize: '20px', 
+        fontWeight: 'bold',
+        margin: '10px',
+        border: '3px solid red',
+        zIndex: 9999,
+        position: 'relative'
+      }}>
+        🧪 TEST: {Object.values(dramasByDay).flat().length} dramas loaded
       </div>
       
-      <div className="retro-panel">
+      {/* シンプルなドラマリスト */}
+      <div style={{padding: '10px'}}>
+        {daysOrder.map((day) => {
+          const dramas = dramasByDay[day] || [];
+          return dramas.length > 0 ? (
+            <div key={day} style={{marginBottom: '10px', padding: '5px', background: 'lightgray'}}>
+              <strong>{day}: </strong>
+              {dramas.map(drama => (
+                <div key={drama.id} style={{fontSize: '14px', margin: '2px 0'}}>
+                  • {drama.title} ({drama.broadcaster})
+                </div>
+              ))}
+            </div>
+          ) : null;
+        })}
+      </div>
+      
+      <div className="retro-panel" style={{display: 'none'}}>
         <div className="panel-header">
           📺 放送中のドラマ
         </div>
