@@ -1,0 +1,191 @@
+/* モバイルハンバーガーメニュースタイル */
+
+/* ハンバーガーボタン */
+.mobile-menu-button {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--retro-blue);
+  border: 2px outset var(--retro-blue);
+  border-radius: 3px;
+  cursor: pointer;
+  position: fixed;
+  top: var(--space-m);
+  left: var(--space-m);
+  z-index: 1001;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-button:hover {
+  background: #0055aa;
+}
+
+.mobile-menu-button:active {
+  border-style: inset;
+}
+
+/* ハンバーガーライン */
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* アクティブ時のアニメーション（×に変化） */
+.mobile-menu-button.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-button.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-button.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* オーバーレイ */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* スライドアウトメニュー */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: var(--retro-white);
+  border-right: 2px solid var(--border-dark);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+/* メニューヘッダー */
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-m);
+  background: var(--retro-gray);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mobile-menu-header h3 {
+  margin: 0;
+  font-size: var(--font-size-m);
+  color: var(--retro-blue);
+}
+
+/* 閉じるボタン */
+.close-button {
+  background: var(--retro-red);
+  color: white;
+  border: 2px outset var(--retro-red);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: #cc0000;
+}
+
+.close-button:active {
+  border-style: inset;
+}
+
+/* メニューコンテンツ */
+.mobile-menu-content {
+  padding: 0;
+}
+
+/* モバイルでのみ表示 */
+@media (max-width: 767px) {
+  .mobile-menu-button {
+    display: flex;
+  }
+}
+
+/* タブレット以上では非表示 */
+@media (min-width: 768px) {
+  .mobile-menu-button,
+  .mobile-menu,
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+}
+
+/* スクロール無効化（メニュー開いている時の背景） */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* アクセシビリティ対応 */
+.mobile-menu-button:focus,
+.close-button:focus {
+  outline: 2px solid var(--retro-yellow);
+  outline-offset: 2px;
+}
+
+/* 長いメニュー項目に対する調整 */
+.mobile-menu .current-dramas-sidebar {
+  width: 100%;
+}
+
+.mobile-menu .drama-schedule {
+  border: none;
+  border-radius: 0;
+}
+
+.mobile-menu .day-section {
+  border-left: none;
+}
+
+/* アニメーション削減モード対応 */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .hamburger-line,
+  .mobile-menu-overlay {
+    transition: none;
+  }
+  
+  .fadeInOverlay {
+    animation: none;
+  }
+}

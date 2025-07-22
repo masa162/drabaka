@@ -6,10 +6,12 @@ import '@/styles/components/drama-detail.css';
 import '@/styles/components/review-form.css';
 import '@/styles/components/like-button.css';
 import '@/styles/components/sidebar.css';
+import '@/styles/components/mobile-menu.css';
 import Header from '@/components/layout/Header';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import Sidebar from '@/components/layout/Sidebar';
+import MobileMenu from '@/components/layout/MobileMenu';
 import { DramaService } from '@/lib/supabase/dramas';
 import CurrentDramas from '@/components/sidebar/CurrentDramas';
 
@@ -36,6 +38,7 @@ export default async function RootLayout({
     <html lang="ja">
       <body>
         <div className="page-wrapper">
+          <MobileMenu dramasByDay={dramasByDay} />
           <Header />
           <Navigation />
           
