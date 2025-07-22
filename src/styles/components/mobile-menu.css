@@ -190,42 +190,54 @@ body.mobile-menu-open {
   overflow: visible !important;
 }
 
-.mobile-menu .retro-panel {
+.mobile-menu .retro-panel,
+.mobile-menu-content .retro-panel {
   background: var(--retro-white) !important;
-  border: 3px solid red !important; /* デバッグ用 */
-  margin: 5px;
+  border: 3px solid red !important;
+  margin: 5px !important;
+  display: block !important;
 }
 
-.mobile-menu .panel-content {
-  background: yellow !important; /* デバッグ用 */
-  padding: var(--space-m);
-  min-height: 200px; /* 最小高さを確保 */
+.mobile-menu .panel-content,
+.mobile-menu-content .panel-content {
+  background: yellow !important;
+  padding: var(--space-m) !important;
+  min-height: 200px !important;
+  display: block !important;
 }
 
-.mobile-menu .day-section {
-  background: lightblue !important; /* デバッグ用 */
-  margin-bottom: 2px;
-  border: 1px solid blue;
-  min-height: 40px;
+.mobile-menu .day-section,
+.mobile-menu-content .day-section {
+  background: lightblue !important;
+  margin-bottom: 2px !important;
+  border: 1px solid blue !important;
+  min-height: 40px !important;
+  display: block !important;
 }
 
-.mobile-menu .day-header {
+.mobile-menu .day-header,
+.mobile-menu-content .day-header {
   background: var(--retro-gray) !important;
-  padding: var(--space-s);
-  border-bottom: 1px solid orange;
+  padding: var(--space-s) !important;
+  border-bottom: 1px solid orange !important;
+  display: block !important;
 }
 
-.mobile-menu .drama-item {
+.mobile-menu .drama-item,
+.mobile-menu-content .drama-item {
   background: white !important;
-  padding: var(--space-s);
-  margin: 2px 0;
-  border: 1px solid purple;
+  padding: var(--space-s) !important;
+  margin: 2px 0 !important;
+  border: 1px solid purple !important;
+  display: block !important;
 }
 
-.mobile-menu .drama-title-mini {
+.mobile-menu .drama-title-mini,
+.mobile-menu-content .drama-title-mini {
   color: red !important;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  display: block !important;
 }
 
 /* アニメーション削減モード対応 */
