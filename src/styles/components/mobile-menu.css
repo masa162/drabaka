@@ -177,6 +177,33 @@ body.mobile-menu-open {
   border-left: none;
 }
 
+/* モバイルメニュー内での表示確認用（一時的に背景色追加） */
+.mobile-menu .retro-panel {
+  background: var(--retro-white);
+  border: 1px solid red; /* デバッグ用 */
+}
+
+.mobile-menu .panel-content {
+  background: yellow; /* デバッグ用 */
+  padding: var(--space-m);
+}
+
+.mobile-menu .day-section {
+  background: lightblue; /* デバッグ用 */
+  margin-bottom: 2px;
+}
+
+.mobile-menu .day-header {
+  background: var(--retro-gray);
+  padding: var(--space-s);
+}
+
+.mobile-menu .drama-item {
+  background: white;
+  padding: var(--space-s);
+  margin: 2px 0;
+}
+
 /* アニメーション削減モード対応 */
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu,
