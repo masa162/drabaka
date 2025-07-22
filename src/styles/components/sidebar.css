@@ -5,8 +5,6 @@
 }
 
 .drama-schedule {
-  max-height: 500px;
-  overflow-y: auto;
   border: 1px solid var(--border-light);
   border-radius: 3px;
 }
@@ -61,8 +59,6 @@
 
 /* ドラマリスト */
 .drama-list {
-  max-height: 200px;
-  overflow-y: auto;
 }
 
 .drama-item-link {
@@ -164,27 +160,6 @@
   margin: 0;
 }
 
-/* スクロールバースタイル */
-.drama-schedule::-webkit-scrollbar,
-.drama-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.drama-schedule::-webkit-scrollbar-track,
-.drama-list::-webkit-scrollbar-track {
-  background: var(--retro-gray);
-}
-
-.drama-schedule::-webkit-scrollbar-thumb,
-.drama-list::-webkit-scrollbar-thumb {
-  background: var(--retro-blue);
-  border-radius: 3px;
-}
-
-.drama-schedule::-webkit-scrollbar-thumb:hover,
-.drama-list::-webkit-scrollbar-thumb:hover {
-  background: #004499;
-}
 
 /* 2000年代風演出 */
 .day-section.day-today .day-header {
