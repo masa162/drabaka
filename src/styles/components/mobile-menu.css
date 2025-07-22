@@ -80,6 +80,7 @@
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3); /* より目立つシャドウ */
 }
 
 .mobile-menu.open {
@@ -178,30 +179,51 @@ body.mobile-menu-open {
 }
 
 /* モバイルメニュー内での表示確認用（一時的に背景色追加） */
+.mobile-menu {
+  background: lime !important; /* メニュー全体を緑色にして確認 */
+}
+
+.mobile-menu .mobile-menu-content {
+  background: magenta !important; /* コンテンツエリアをマゼンタに */
+  padding: 10px;
+}
+
 .mobile-menu .retro-panel {
-  background: var(--retro-white);
-  border: 1px solid red; /* デバッグ用 */
+  background: var(--retro-white) !important;
+  border: 3px solid red !important; /* デバッグ用 */
+  margin: 5px;
 }
 
 .mobile-menu .panel-content {
-  background: yellow; /* デバッグ用 */
+  background: yellow !important; /* デバッグ用 */
   padding: var(--space-m);
+  min-height: 200px; /* 最小高さを確保 */
 }
 
 .mobile-menu .day-section {
-  background: lightblue; /* デバッグ用 */
+  background: lightblue !important; /* デバッグ用 */
   margin-bottom: 2px;
+  border: 1px solid blue;
+  min-height: 40px;
 }
 
 .mobile-menu .day-header {
-  background: var(--retro-gray);
+  background: var(--retro-gray) !important;
   padding: var(--space-s);
+  border-bottom: 1px solid orange;
 }
 
 .mobile-menu .drama-item {
-  background: white;
+  background: white !important;
   padding: var(--space-s);
   margin: 2px 0;
+  border: 1px solid purple;
+}
+
+.mobile-menu .drama-title-mini {
+  color: red !important;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 /* アニメーション削減モード対応 */
