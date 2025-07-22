@@ -42,8 +42,15 @@ export default function CurrentDramas({ dramasByDay }: CurrentDramasProps) {
   const currentDay = getCurrentDay();
   const daysOrder = ['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'];
 
+  console.log('CurrentDramas - About to return JSX');
+  
   return (
     <div className="current-dramas-sidebar">
+      {/* テスト用デバッグ表示 */}
+      <div style={{background: 'orange', padding: '20px', fontSize: '16px', fontWeight: 'bold'}}>
+        🧪 CurrentDramas Component Test - Total: {Object.values(dramasByDay).flat().length} dramas
+      </div>
+      
       <div className="retro-panel">
         <div className="panel-header">
           📺 放送中のドラマ
