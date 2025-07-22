@@ -3,9 +3,10 @@ import { Drama } from '@/lib/types/database';
 
 interface CurrentDramasProps {
   dramasByDay: {[key: string]: Drama[]};
+  onLinkClick?: () => void;
 }
 
-export default function CurrentDramas({ dramasByDay }: CurrentDramasProps) {
+export default function CurrentDramas({ dramasByDay, onLinkClick }: CurrentDramasProps) {
   // デバッグ用ログ（一時的）
   console.log('CurrentDramas - dramasByDay:', dramasByDay);
   console.log('CurrentDramas - Object.keys:', Object.keys(dramasByDay));
@@ -69,9 +70,24 @@ export default function CurrentDramas({ dramasByDay }: CurrentDramasProps) {
             <div key={day} style={{marginBottom: '10px', padding: '5px', background: 'lightgray'}}>
               <strong>{day}: </strong>
               {dramas.map(drama => (
-                <div key={drama.id} style={{fontSize: '14px', margin: '2px 0'}}>
+                <Link 
+                  key={drama.id} 
+                  href={`/drama/${drama.id}`}
+                  style={{
+                    textDecoration: 'none', 
+                    color: 'inherit',
+                    display: 'block',
+                    fontSize: '14px', 
+                    margin: '2px 0',
+                    padding: '2px 0',
+                    borderRadius: '3px'
+                  }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#e0e0e0'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                  onClick={onLinkClick}
+                >
                   • {drama.title} ({drama.broadcaster})
-                </div>
+                </Link>
               ))}
             </div>
           ) : null;

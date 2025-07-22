@@ -71,7 +71,7 @@ export default function MobileMenu({ dramasByDay }: MobileMenuProps) {
           </button>
         </div>
         <div className="mobile-menu-content">
-          <CurrentDramas dramasByDay={dramasByDay} />
+          <CurrentDramas dramasByDay={dramasByDay} onLinkClick={closeMenu} />
         </div>
       </div>
     </>
