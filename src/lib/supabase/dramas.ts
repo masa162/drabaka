@@ -137,7 +137,8 @@ export class DramaService {
       .from('dramas')
       .select('*')
       .eq('featured_popular', true)
-      .order('featured_priority, created_at desc')
+      .order('featured_priority')
+      .order('created_at', { ascending: false })
       .limit(4);
       
     if (error) {

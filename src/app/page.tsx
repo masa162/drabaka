@@ -11,9 +11,6 @@ export default async function HomePage() {
     ReviewService.getLatest(3)
   ]);
   
-  // デバッグ用ログ（一時的）
-  console.log('featuredPopular:', featuredPopular);
-  console.log('featuredPopular.length:', featuredPopular.length);
   return (
     <div className="homepage">
       {/* 今週の要注意ドラマ */}
