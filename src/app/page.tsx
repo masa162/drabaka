@@ -4,7 +4,9 @@ import Link from 'next/link';
 
 export default async function HomePage() {
   // 実際のデータを取得
-  const [completedDramas, latestReviews] = await Promise.all([
+  const [featuredWeekly, featuredPopular, completedDramas, latestReviews] = await Promise.all([
+    DramaService.getFeaturedWeekly(),
+    DramaService.getFeaturedPopular(),
     DramaService.getCompletedDramas(),
     ReviewService.getLatest(3)
   ]);
@@ -17,32 +19,43 @@ export default async function HomePage() {
             <span className="sparkle">⚠️ 今週の要注意</span>
           </div>
           <div className="panel-content">
-            <div className="featured-drama">
-              <h3 className="mb-s">📺 ドラマタイトル（サンプル）</h3>
-              <div className="drama-meta mb-s">
-                <span className="color-primary">🏢 フジテレビ</span> | 
-                <span className="color-primary">⏰ 月21:00</span> | 
-                <span className="color-primary">🎭 主演者名</span>
+            {featuredWeekly ? (
+              <div className="featured-drama">
+                <Link href={`/drama/${featuredWeekly.id}`}>
+                  <h3 className="mb-s">📺 {featuredWeekly.title}</h3>
+                </Link>
+                <div className="drama-meta mb-s">
+                  <span className="color-primary">🏢 {featuredWeekly.broadcaster}</span> | 
+                  <span className="color-primary">⏰ {featuredWeekly.timeslot || '時間未定'}</span> | 
+                  <span className="color-primary">🎭 {featuredWeekly.main_cast || '出演者情報準備中'}</span>
+                </div>
+                <div className="warning-flags mb-s">
+                  <span className="retro-button retro-button--danger">バカ度MAX</span>
+                  <span className="retro-button">中毒注意</span>
+                </div>
+                <p className="color-muted">
+                  {featuredWeekly.synopsis || 'このドラマは見始めたら最後、気がついたら次の話を見ているという恐ろしいドラマです...'}
+                </p>
               </div>
-              <div className="warning-flags mb-s">
-                <span className="retro-button retro-button--danger">バカ度MAX</span>
-                <span className="retro-button">中毒注意</span>
+            ) : (
+              <div className="featured-drama">
+                <h3 className="mb-s">📺 今週の要注意ドラマを準備中</h3>
+                <p className="color-muted">
+                  バカ度MAXなドラマを厳選中です。しばらくお待ちください...
+                </p>
               </div>
-              <p className="color-muted">
-                このドラマは見始めたら最後、気がついたら次の話を見ているという恐ろしいドラマです...
-              </p>
-            </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* 完了ドラマ（実データ） */}
+      {/* 話題のドラマ（実データ） */}
       <section className="current-dramas mb-l">
         <div className="retro-panel">
           <div className="panel-header">📺 話題のドラマ</div>
           <div className="panel-content">
             <div className="drama-grid">
-              {completedDramas.slice(0, 4).map((drama) => (
+              {(featuredPopular.length > 0 ? featuredPopular : completedDramas.slice(0, 4)).map((drama) => (
                 <Link key={drama.id} href={`/drama/${drama.id}`} className="drama-card-link">
                   <div className="drama-card">
                     <div className="drama-card-header mb-s">

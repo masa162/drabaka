@@ -15,6 +15,9 @@ export type Database = {
           synopsis: string | null;
           main_cast: string | null;
           status: 'airing' | 'completed' | 'upcoming';
+          featured_weekly: boolean | null;
+          featured_popular: boolean | null;
+          featured_priority: number | null;
           created_at: string;
           updated_at: string;
         };
@@ -29,6 +32,9 @@ export type Database = {
           synopsis?: string;
           main_cast?: string;
           status?: 'airing' | 'completed' | 'upcoming';
+          featured_weekly?: boolean;
+          featured_popular?: boolean;
+          featured_priority?: number;
         };
         Update: {
           title?: string;
@@ -41,6 +47,9 @@ export type Database = {
           synopsis?: string;
           main_cast?: string;
           status?: 'airing' | 'completed' | 'upcoming';
+          featured_weekly?: boolean;
+          featured_popular?: boolean;
+          featured_priority?: number;
           updated_at?: string;
         };
       };

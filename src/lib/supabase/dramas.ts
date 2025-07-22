@@ -112,4 +112,38 @@ export class DramaService {
     }
     return data || [];
   }
+  
+  // 今週の要注意ドラマ取得
+  static async getFeaturedWeekly(): Promise<Drama | null> {
+    const { data, error } = await supabase
+      .from('dramas')
+      .select('*')
+      .eq('featured_weekly', true)
+      .eq('status', 'airing')
+      .order('featured_priority')
+      .limit(1)
+      .single();
+      
+    if (error) {
+      console.error('Error fetching featured weekly drama:', error);
+      return null;
+    }
+    return data;
+  }
+  
+  // 話題のドラマ取得
+  static async getFeaturedPopular(): Promise<Drama[]> {
+    const { data, error } = await supabase
+      .from('dramas')
+      .select('*')
+      .eq('featured_popular', true)
+      .order('featured_priority, created_at desc')
+      .limit(4);
+      
+    if (error) {
+      console.error('Error fetching featured popular dramas:', error);
+      return [];
+    }
+    return data || [];
+  }
 }
