@@ -6,7 +6,6 @@ export type Database = {
         Row: {
           id: number;
           title: string;
-          slug: string;
           year: number;
           season: 'spring' | 'summer' | 'autumn' | 'winter';
           broadcaster: string;
@@ -21,7 +20,6 @@ export type Database = {
         };
         Insert: {
           title: string;
-          slug: string;
           year: number;
           season: 'spring' | 'summer' | 'autumn' | 'winter';
           broadcaster: string;
@@ -34,7 +32,6 @@ export type Database = {
         };
         Update: {
           title?: string;
-          slug?: string;
           year?: number;
           season?: 'spring' | 'summer' | 'autumn' | 'winter';
           broadcaster?: string;
