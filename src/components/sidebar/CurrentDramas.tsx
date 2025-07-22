@@ -82,8 +82,14 @@ export default function CurrentDramas({ dramasByDay, onLinkClick }: CurrentDrama
                     padding: '2px 0',
                     borderRadius: '3px'
                   }}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = '#e0e0e0'}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                  onMouseEnter={(e) => {
+                    const target = e.target as HTMLElement;
+                    target.style.backgroundColor = '#e0e0e0';
+                  }}
+                  onMouseLeave={(e) => {
+                    const target = e.target as HTMLElement;
+                    target.style.backgroundColor = 'transparent';
+                  }}
                   onClick={onLinkClick}
                 >
                   • {drama.title} ({drama.broadcaster})
