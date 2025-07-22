@@ -9,6 +9,11 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ dramasByDay }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // デバッグ用ログ（一時的）
+  console.log('MobileMenu - dramasByDay:', dramasByDay);
+  console.log('MobileMenu - Object.keys(dramasByDay):', Object.keys(dramasByDay));
+  console.log('MobileMenu - Total dramas:', Object.values(dramasByDay).flat().length);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

@@ -30,6 +30,7 @@ export default async function RootLayout({
   let dramasByDay = {};
   try {
     dramasByDay = await DramaService.getCurrentDramasByDay();
+    console.log('Layout - dramasByDay loaded:', Object.keys(dramasByDay), 'Total:', Object.values(dramasByDay).flat().length);
   } catch (error) {
     console.error('Error loading current dramas:', error);
   }

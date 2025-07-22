@@ -6,6 +6,10 @@ interface CurrentDramasProps {
 }
 
 export default function CurrentDramas({ dramasByDay }: CurrentDramasProps) {
+  // デバッグ用ログ（一時的）
+  console.log('CurrentDramas - dramasByDay:', dramasByDay);
+  console.log('CurrentDramas - Object.keys:', Object.keys(dramasByDay));
+  
   const getDayShort = (day: string) => {
     switch (day) {
       case '月曜日': return '月';
