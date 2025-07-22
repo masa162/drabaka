@@ -59,7 +59,7 @@ export default async function HomePage() {
           <div className="panel-header">📺 話題のドラマ</div>
           <div className="panel-content">
             <div className="drama-grid">
-              {(featuredPopular.length > 0 ? featuredPopular : completedDramas.slice(0, 4)).map((drama) => (
+              {featuredPopular.length > 0 ? featuredPopular.map((drama) => (
                 <Link key={drama.id} href={`/drama/${drama.id}`} className="drama-card-link">
                   <div className="drama-card">
                     <div className="drama-card-header mb-s">
@@ -78,7 +78,9 @@ export default async function HomePage() {
                     </div>
                   </div>
                 </Link>
-              ))}
+              )) : (
+                <p className="color-muted">話題のドラマを準備中です...</p>
+              )}
             </div>
           </div>
         </div>
