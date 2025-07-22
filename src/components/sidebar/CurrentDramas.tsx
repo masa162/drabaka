@@ -10,6 +10,11 @@ export default function CurrentDramas({ dramasByDay }: CurrentDramasProps) {
   console.log('CurrentDramas - dramasByDay:', dramasByDay);
   console.log('CurrentDramas - Object.keys:', Object.keys(dramasByDay));
   
+  // 各曜日のドラマ数詳細チェック
+  Object.keys(dramasByDay).forEach(day => {
+    console.log(`CurrentDramas - ${day}:`, dramasByDay[day].length, dramasByDay[day]);
+  });
+  
   const getDayShort = (day: string) => {
     switch (day) {
       case '月曜日': return '月';

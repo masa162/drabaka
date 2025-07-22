@@ -183,9 +183,11 @@ body.mobile-menu-open {
   background: lime !important; /* メニュー全体を緑色にして確認 */
 }
 
-.mobile-menu .mobile-menu-content {
+.mobile-menu-content {
   background: magenta !important; /* コンテンツエリアをマゼンタに */
-  padding: 10px;
+  padding: 10px !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .mobile-menu .retro-panel {
