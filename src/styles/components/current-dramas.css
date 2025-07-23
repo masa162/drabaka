@@ -1,0 +1,346 @@
+/* Current Dramas Component - ちゃんねるレビュー風スタイル */
+
+.current-dramas-schedule {
+  font-size: 80%;
+  line-height: 1.5;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+  word-break: normal;
+  word-wrap: break-word;
+}
+
+/* 曜日セクション */
+.day-section {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+}
+
+.day-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.day-section.day-today {
+  background: rgba(0, 102, 204, 0.05);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin: 0.5rem -0.25rem;
+}
+
+/* 曜日ヘッダー */
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.day-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.today-badge {
+  background: var(--retro-orange);
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.drama-count {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ドラマスケジュール表 - ちゃんねるレビュー風 */
+.drama-schedule-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+/* 統合されたドラマスケジュール表 - ちゃんねるレビュー最適化 */
+.drama-schedule-table-unified {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.drama-schedule-row {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 0.75rem;
+  padding: 0.4rem 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* 統合レイアウト用の行スタイル - 3カラム（ちゃんねるレビュー最適化） */
+.drama-schedule-row-unified {
+  display: grid;
+  grid-template-columns: 25px 45px 1fr;
+  gap: 0.3rem;
+  padding: 4px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  line-height: 1.5;
+}
+
+.drama-schedule-row:last-child {
+  border-bottom: none;
+}
+
+.drama-schedule-row-unified:last-child {
+  border-bottom: none;
+}
+
+.drama-schedule-row:hover {
+  background: rgba(0, 102, 204, 0.1);
+  color: #fff;
+}
+
+.drama-schedule-row-unified:hover {
+  background: rgba(0, 102, 204, 0.1);
+  color: #fff;
+}
+
+/* 時間カラム */
+.drama-time-col {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  text-align: right;
+  padding-right: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 45px;
+}
+
+/* 3カラムレイアウト用（ちゃんねるレビュー最適化） */
+.drama-day-col {
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+}
+
+.drama-time-col {
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.drama-title-col {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--retro-blue);
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.today-dot {
+  color: var(--retro-orange);
+  font-size: 0.6rem;
+  margin-left: 0.15rem;
+}
+
+.today-drama .drama-day-col {
+  color: var(--retro-orange);
+  font-weight: 700;
+}
+
+.today-drama .drama-time-col {
+  color: #fff;
+  font-weight: 600;
+}
+
+.drama-schedule-row-unified:hover .drama-title-col {
+  color: #66aaff;
+}
+
+/* 情報カラム */
+.drama-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0; /* flexで縮小可能にする */
+}
+
+.drama-title-compact {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--retro-blue);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drama-schedule-row:hover .drama-title-compact {
+  color: #66aaff;
+}
+
+.drama-broadcaster-compact {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* フッター */
+.schedule-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.schedule-note {
+  text-align: center;
+}
+
+.note-text {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* モバイル対応（ちゃんねるレビュー最適化） */
+@media (max-width: 767px) {
+  .current-dramas-schedule {
+    font-size: 75%;
+  }
+  
+  .drama-schedule-row {
+    grid-template-columns: 45px 1fr;
+    gap: 0.3rem;
+    padding: 3px;
+  }
+  
+  .drama-schedule-row-unified {
+    grid-template-columns: 22px 40px 1fr;
+    gap: 0.3rem;
+    padding: 3px;
+  }
+  
+  .drama-day-col {
+    font-size: 1em;
+    min-width: 18px;
+  }
+  
+  .drama-time-col {
+    font-size: 1em;
+    min-width: 35px;
+  }
+  
+  .drama-title-col {
+    font-size: 1em;
+  }
+  
+  .today-dot {
+    font-size: 0.6em;
+  }
+  
+  .drama-title-compact {
+    font-size: 1em;
+  }
+  
+  .drama-broadcaster-compact {
+    font-size: 0.9em;
+  }
+  
+  .day-header {
+    margin-bottom: 0.3rem;
+  }
+  
+  .day-label {
+    font-size: 1em;
+  }
+}
+
+/* アクセシビリティ */
+.drama-schedule-row:focus {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 1px;
+}
+
+.drama-schedule-row-unified:focus {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 1px;
+}
+
+.drama-schedule-row:focus-visible {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 1px;
+}
+
+.drama-schedule-row-unified:focus-visible {
+  outline: 2px solid var(--retro-blue);
+  outline-offset: 1px;
+}
+
+/* ハイコントラストモード対応 */
+@media (prefers-contrast: high) {
+  .drama-title-compact {
+    color: #88ccff;
+  }
+  
+  .drama-schedule-row:hover .drama-title-compact {
+    color: #aaddff;
+  }
+  
+  .drama-time-col {
+    color: #ffffff;
+  }
+}
+
+/* プリント対応 */
+@media print {
+  .drama-schedule-row {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ccc;
+  }
+  
+  .drama-title-compact {
+    color: #0066cc !important;
+  }
+  
+  .today-badge {
+    background: #333 !important;
+    color: white !important;
+  }
+}

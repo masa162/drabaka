@@ -93,18 +93,13 @@ export default async function HomePage() {
                 <div key={review.id} className="review-item mb-m">
                   <div className="review-header mb-s">
                     <span className="reviewer-name font-bold">{review.nickname}</span>
-                    <span className="review-rating">{'🧠'.repeat(review.rating)}</span>
+                    <span className="review-rating">{'⭐'.repeat(review.rating)}</span>
                     <span className="review-date color-muted">
                       {new Date(review.created_at).toLocaleDateString('ja-JP')}
                     </span>
                   </div>
                   <div className="review-content mb-s">
                     <p>{review.comment}</p>
-                  </div>
-                  <div className="review-actions">
-                    <button className="retro-button retro-button--primary">
-                      👍 同じ穴のムジナ (0)
-                    </button>
                   </div>
                 </div>
               ))}

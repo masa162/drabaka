@@ -11,17 +11,18 @@
     "supabase:types": "supabase gen types typescript --project-id YOUR_PROJECT_ID > src/lib/types/database.types.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^17.2.0",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "@supabase/supabase-js": "^2.39.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.3.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "15.1.7"
+    "eslint-config-next": "15.1.7",
+    "typescript": "^5.3.0"
   }
 }

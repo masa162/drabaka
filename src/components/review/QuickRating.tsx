@@ -59,7 +59,7 @@ export default function QuickRating({ dramaId, onSuccess }: QuickRatingProps) {
     return (
       <section className="quick-rating-section mb-l">
         <div className="retro-panel">
-          <div className="panel-header">⭐ ★５段階評価</div>
+          <div className="panel-header">⭐ ５段階評価</div>
           <div className="panel-content">
             <div className="rating-success text-center">
               <div className="success-animation mb-m">
@@ -92,7 +92,7 @@ export default function QuickRating({ dramaId, onSuccess }: QuickRatingProps) {
   return (
     <section className="quick-rating-section mb-l">
       <div className="retro-panel">
-        <div className="panel-header">⭐ ★５段階評価</div>
+        <div className="panel-header">⭐ ５段階評価</div>
         <div className="panel-content">
           <div className="quick-rating-content">
             <p className="rating-prompt mb-m text-center">

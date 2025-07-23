@@ -6,6 +6,8 @@
 /* コンポーネント別CSS */
 @import '../styles/components/quick-rating.css';
 @import '../styles/components/mobile-menu.css';
+@import '../styles/components/search.css';
+@import '../styles/components/current-dramas.css';
 
 /* ベースリセット */
 * {

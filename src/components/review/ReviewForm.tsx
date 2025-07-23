@@ -142,7 +142,7 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
             {/* ★５段階評価 */}
             <div className="form-group">
               <label className="form-label">
-                ⭐ ★５段階評価
+                ⭐ ５段階評価
               </label>
               <div className="star-rating-form">
                 {[1, 2, 3, 4, 5].map((star) => (
