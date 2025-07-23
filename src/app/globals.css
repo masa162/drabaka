@@ -1,7 +1,11 @@
 /* ========================================
-   ドラマバカ一代 v2 グローバルCSS
+   ドラマバカ一代 グローバルCSS
    2000年代風レトロデザイン完全再現
 ======================================== */
+
+/* コンポーネント別CSS */
+@import '../styles/components/quick-rating.css';
+@import '../styles/components/mobile-menu.css';
 
 /* ベースリセット */
 * {
@@ -441,4 +445,14 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Secondary Button Style */
+.retro-button--secondary {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  color: #333;
+  border-color: #a0a0a0;
+}
+.retro-button--secondary:hover {
+  background: linear-gradient(to bottom, #e8e8e8, #c8c8c8);
 }

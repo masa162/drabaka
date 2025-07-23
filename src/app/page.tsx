@@ -31,7 +31,7 @@ export default async function HomePage() {
                   <span className="color-primary">🎭 {featuredWeekly.main_cast || '出演者情報準備中'}</span>
                 </div>
                 <div className="warning-flags mb-s">
-                  <span className="retro-button retro-button--danger">バカ度MAX</span>
+                  <span className="retro-button retro-button--danger">話題度MAX</span>
                   <span className="retro-button">中毒注意</span>
                 </div>
                 <p className="color-muted">
@@ -42,7 +42,7 @@ export default async function HomePage() {
               <div className="featured-drama">
                 <h3 className="mb-s">📺 今週の要注意ドラマを準備中</h3>
                 <p className="color-muted">
-                  バカ度MAXなドラマを厳選中です。しばらくお待ちください...
+                  話題度MAXなドラマを厳選中です。しばらくお待ちください...
                 </p>
               </div>
             )}
@@ -122,7 +122,7 @@ export default async function HomePage() {
               <div className="update-item mb-s">
                 <span className="update-date color-muted">2025/07/21</span>
                 <span className="update-text">
-                  🎉 <strong>ドラマバカ一代 v2</strong> リニューアルオープン！
+                  🎉 <strong>ドラマバカ一代</strong> リニューアルオープン！
                 </span>
               </div>
               <div className="update-item mb-s">
@@ -145,18 +145,18 @@ export default async function HomePage() {
       {/* サイト説明 */}
       <section className="site-description">
         <div className="retro-panel">
-          <div className="panel-header">🧠 このサイトについて</div>
+          <div className="panel-header">📺 このサイトについて</div>
           <div className="panel-content">
             <p className="mb-m">
-              <strong>ドラマバカ一代 v2</strong> は、40代over↑の地上波ドラマ好き日本人のための感想サイトです。
+              <strong>ドラマバカ一代</strong> は、ドラマ好きの皆さんのための感想シェアサイトです。
             </p>
             <p className="mb-m">
-              見すぎて頭おかしくなったヤツら同士で、気軽にドラマの感想を共有しましょう！
+              ドラマファン同士で、気軽に感想やレビューを共有しましょう！
             </p>
             <div className="feature-list">
               <p className="mb-s">✅ <strong>匿名投稿</strong>: お気軽に感想をどうぞ</p>
-              <p className="mb-s">✅ <strong>5段階バカ度評価</strong>: 🧠で評価</p>
-              <p className="mb-s">✅ <strong>同じ穴のムジナ機能</strong>: 共感したらいいね！</p>
+              <p className="mb-s">✅ <strong>★５段階評価</strong>: シンプルな星評価</p>
+              <p className="mb-s">✅ <strong>コミュニティ機能</strong>: 共感したらいいね！</p>
               <p className="mb-s">✅ <strong>2000年代風デザイン</strong>: ノスタルジー満載</p>
             </div>
           </div>

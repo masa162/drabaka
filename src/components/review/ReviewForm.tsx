@@ -11,7 +11,7 @@ interface ReviewFormProps {
 
 export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
   const [formData, setFormData] = useState({
-    nickname: '匿名バカ仲間',
+    nickname: '匿名ユーザー',
     rating: 3,
     comment: ''
   });
@@ -47,7 +47,7 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
       
       // フォームリセット
       setFormData({
-        nickname: '匿名バカ仲間',
+        nickname: '匿名ユーザー',
         rating: 3,
         comment: ''
       });
@@ -74,11 +74,11 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
 
   const getRatingDescription = (rating: number) => {
     switch (rating) {
-      case 5: return 'バカ度MAX - 完全に頭がやられた';
-      case 4: return '重症 - かなりハマってしまった';
-      case 3: return '中等症 - そこそこ楽しめた';
-      case 2: return '軽症 - まぁまぁだった';
-      case 1: return '正常 - う〜ん...';
+      case 5: return '★★★★★ - 最高でした！';
+      case 4: return '★★★★☆ - とても良かった';
+      case 3: return '★★★☆☆ - 楽しめました';
+      case 2: return '★★☆☆☆ - まあまあでした';
+      case 1: return '★☆☆☆☆ - う〜ん...';
       default: return '';
     }
   };
@@ -87,20 +87,20 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
     return (
       <section className="review-form-section mb-l">
         <div className="retro-panel">
-          <div className="panel-header">📝 感想を書く</div>
+          <div className="panel-header">💭 詳しい感想を書く</div>
           <div className="panel-content">
             <div className="review-form-cta">
               <p className="cta-message mb-m">
-                🧠 <strong>あなたもバカ度を測定してみませんか？</strong>
+                ✍️ <strong>さらに詳しい感想を書いてみませんか？</strong>
               </p>
               <p className="cta-description mb-l color-muted">
-                見すぎて頭おかしくなったヤツら同士で感想を共有しましょう！匿名なので気軽に投稿できます。
+                簡単評価の次は、あなたの詳しい感想をシェアしましょう！匿名なので気軽に投稿できます。
               </p>
               <button 
                 onClick={() => setShowForm(true)}
-                className="retro-button retro-button--primary review-form-trigger"
+                className="retro-button retro-button--secondary review-form-trigger"
               >
-                ✍️ 感想を書く
+                📝 詳しい感想を書く
               </button>
             </div>
           </div>
@@ -133,16 +133,16 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
                 onChange={(e) => setFormData(prev => ({ ...prev, nickname: e.target.value }))}
                 className="form-input"
                 maxLength={20}
-                placeholder="匿名バカ仲間"
+                placeholder="匿名ユーザー"
                 disabled={loading}
               />
               <p className="form-hint">20文字以内で入力してください</p>
             </div>
             
-            {/* バカ度評価 */}
+            {/* ★５段階評価 */}
             <div className="form-group">
               <label className="form-label">
-                🧠 バカ度評価
+                ⭐ ★５段階評価
               </label>
               <div className="star-rating-form">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -156,7 +156,7 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
                       disabled={loading}
                     />
                     <span className={`star ${formData.rating >= star ? 'star-active' : ''}`}>
-                      🧠
+                      ⭐
                     </span>
                   </label>
                 ))}
@@ -165,6 +165,7 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
                 {getRatingDescription(formData.rating)}
               </p>
             </div>
+            
             
             {/* コメント */}
             <div className="form-group">
@@ -176,7 +177,7 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
                 value={formData.comment}
                 onChange={(e) => setFormData(prev => ({ ...prev, comment: e.target.value }))}
                 className="form-textarea review-textarea"
-                placeholder="このドラマについて一言どうぞ！どんな風に頭がおかしくなったか教えてください..."
+                placeholder="このドラマについて一言どうぞ！"
                 maxLength={500}
                 disabled={loading}
                 rows={4}

@@ -5,6 +5,7 @@ import DramaDetail from '@/components/drama/DramaDetail';
 import ReviewList from '@/components/review/ReviewList';
 import DramaStats from '@/components/drama/DramaStats';
 import ReviewForm from '@/components/review/ReviewForm';
+import QuickRating from '@/components/review/QuickRating';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -37,7 +38,10 @@ export default async function DramaPage({ params }: Props) {
       {/* 統計情報 */}
       <DramaStats stats={stats} />
       
-      {/* レビュー投稿フォーム */}
+      {/* 簡単評価フォーム */}
+      <QuickRating dramaId={dramaId} />
+      
+      {/* 詳細レビュー投稿フォーム */}
       <ReviewForm dramaId={dramaId} />
       
       {/* レビュー一覧 */}
