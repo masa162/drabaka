@@ -87,8 +87,8 @@ export default function LikeButton({
 
   const getLikeButtonText = () => {
     if (loading) return '処理中...';
-    if (isLiked) return '👍 同じ穴のムジナ';
-    return '👍 同じ穴のムジナ';
+    if (isLiked) return '👍 いいね';
+    return '👍 いいね';
   };
 
   const getLikeButtonClass = () => {

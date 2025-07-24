@@ -63,11 +63,6 @@ export default function DramaDetail({ drama }: DramaDetailProps) {
             </div>
             
             <div className="meta-item">
-              <span className="meta-label">📅 曜日:</span>
-              <span className="meta-value">{drama.air_day || '情報なし'}</span>
-            </div>
-            
-            <div className="meta-item">
               <span className="meta-label">🗓️ 放送年:</span>
               <span className="meta-value">{drama.year}年 {getSeasonLabel(drama.season)}</span>
             </div>

@@ -19,7 +19,7 @@ export default function ReviewList({ reviews, dramaId }: ReviewListProps) {
   };
 
   const getBrainEmojis = (rating: number) => {
-    return '🧠'.repeat(rating);
+    return '⭐'.repeat(rating);
   };
 
   if (reviews.length === 0) {

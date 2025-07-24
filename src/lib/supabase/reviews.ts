@@ -65,7 +65,7 @@ export class ReviewService {
     return { 
       total, 
       average: Math.round(average * 100) / 100,
-      brainEmojis: '🧠'.repeat(Math.round(average))
+      brainEmojis: '⭐'.repeat(Math.round(average))
     };
   }
 }
