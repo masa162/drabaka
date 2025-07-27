@@ -1,0 +1,9 @@
+# SQL_temp gitignore
+# 一時SQLファイルはコミットしない（秘匿情報保護）
+
+*.sql
+*.tmp
+
+# READMEは残す
+!README.md
+!.gitignore
