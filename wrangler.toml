@@ -1,11 +1,5 @@
 # Wrangler 設定ファイル
 
-# --------------------------------------------------
-# 本番デプロイ設定
-# --------------------------------------------------
-name = "drabaka"
-pages_build_output_dir = ".next"
-
 [[d1_databases]]
 binding = "DB" # アプリケーションからアクセスする名前
 database_name = "drabaka-DB"
