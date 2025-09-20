@@ -1,18 +1,14 @@
-import { notFound } from 'next/navigation';
-import { DramaService } from '@/lib/d1/dramas';
-import { ReviewService } from '@/lib/d1/reviews';
-import DramaDetail from '@/components/drama/DramaDetail';
-import ReviewList from '@/components/review/ReviewList';
-import DramaStats from '@/components/drama/DramaStats';
-import ReviewForm from '@/components/review/ReviewForm';
 import QuickRating from '@/components/review/QuickRating';
+import type { D1Database } from '@cloudflare/workers-types';
+
+export const runtime = 'edge'; // Edge Runtimeを指定
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
 export default async function DramaPage({ params }: Props) {
-  const db = process.env.DB;
+  const db = process.env.DB as D1Database;
   if (!db) {
     console.error("Database connection not found.");
     return notFound();
@@ -47,7 +43,7 @@ export default async function DramaPage({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  const db = process.env.DB;
+  const db = process.env.DB as D1Database;
   if (!db) return [];
 
   try {
@@ -64,7 +60,7 @@ export async function generateStaticParams() {
 export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props) {
-  const db = process.env.DB;
+  const db = process.env.DB as D1Database;
   if (!db) return { title: 'データベース接続エラー' };
 
   const { id } = await params;

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { ReviewService } from '@/lib/d1/reviews';
 import { ReviewInsert } from '@/lib/types/database';
 
+export const runtime = 'edge'; // Edge Runtimeを指定
+
 // POST /api/reviews
 export async function POST(request: Request) {
   const db = process.env.DB;

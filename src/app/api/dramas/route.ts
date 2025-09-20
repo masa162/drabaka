@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { DramaService } from '@/lib/d1/dramas';
 
+export const runtime = 'edge'; // Edge Runtimeを指定
+
 // GET /api/dramas
 export async function GET() {
   const db = process.env.DB;

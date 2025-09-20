@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { LikeService } from '@/lib/d1/likes';
 
+export const runtime = 'edge'; // Edge Runtimeを指定
+
 // POST /api/likes
 export async function POST(request: Request) {
   const db = process.env.DB;
