@@ -1,3 +1,10 @@
+import { notFound } from 'next/navigation';
+import { DramaService } from '@/lib/d1/dramas';
+import { ReviewService } from '@/lib/d1/reviews';
+import DramaDetail from '@/components/drama/DramaDetail';
+import ReviewList from '@/components/review/ReviewList';
+import DramaStats from '@/components/drama/DramaStats';
+import ReviewForm from '@/components/review/ReviewForm';
 import QuickRating from '@/components/review/QuickRating';
 import type { D1Database } from '@cloudflare/workers-types';
 
