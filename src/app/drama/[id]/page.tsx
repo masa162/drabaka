@@ -42,23 +42,6 @@ export default async function DramaPage({ params }: Props) {
   );
 }
 
-export async function generateStaticParams() {
-  const db = process.env.DB as D1Database;
-  if (!db) return [];
-
-  try {
-    const dramas = await DramaService.getAll(db);
-    return dramas.map((drama) => ({
-      id: drama.id.toString(),
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
-}
-
-export const revalidate = 300;
-
 export async function generateMetadata({ params }: Props) {
   const db = process.env.DB as D1Database;
   if (!db) return { title: 'データベース接続エラー' };
