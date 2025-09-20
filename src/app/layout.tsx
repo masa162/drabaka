@@ -12,7 +12,7 @@ import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import Sidebar from '@/components/layout/Sidebar';
 import MobileMenu from '@/components/layout/MobileMenu';
-import { DramaService } from '@/lib/supabase/dramas';
+import { DramaService } from '@/lib/d1/dramas';
 import CurrentDramas from '@/components/sidebar/CurrentDramas';
 
 export const metadata: Metadata = {
@@ -26,11 +26,15 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const db = process.env.DB;
   // 放送中ドラマデータを取得
   let dramasByDay = {};
   try {
-    dramasByDay = await DramaService.getCurrentDramasByDay();
-    console.log('Layout - dramasByDay loaded:', Object.keys(dramasByDay), 'Total:', Object.values(dramasByDay).flat().length);
+    if (db) {
+      dramasByDay = await DramaService.getCurrentDramasByDay(db);
+    } else {
+      console.error('Database connection not found in layout.');
+    }
   } catch (error) {
     console.error('Error loading current dramas:', error);
   }

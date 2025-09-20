@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { ReviewService } from '@/lib/supabase/reviews';
-import { ReviewInsert } from '@/lib/types/database';
 
 interface QuickRatingProps {
   dramaId: number;
@@ -20,14 +18,24 @@ export default function QuickRating({ dramaId, onSuccess }: QuickRatingProps) {
     setLoading(true);
 
     try {
-      const reviewData: ReviewInsert = {
-        drama_id: dramaId,
-        nickname: '匿名ユーザー',
-        rating: selectedRating,
-        comment: undefined // コメントなし
-      };
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          drama_id: dramaId,
+          nickname: '匿名ユーザー',
+          rating: selectedRating,
+          comment: null, // コメントなし
+        }),
+      });
 
-      await ReviewService.create(reviewData);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || '評価の投稿に失敗しました。');
+      }
+
       setSubmitted(true);
       
       if (onSuccess) {

@@ -1,26 +1,32 @@
 import { Review } from '@/lib/types/database';
 import LikeButton from './LikeButton';
+import { LikeService } from '@/lib/d1/likes';
+import { getUserSession } from '@/lib/utils/session';
 
 interface ReviewListProps {
   reviews: Review[];
   dramaId: number;
 }
 
-export default function ReviewList({ reviews, dramaId }: ReviewListProps) {
+export default async function ReviewList({ reviews, dramaId }: ReviewListProps) {
+  const db = process.env.DB;
+  const userSession = getUserSession();
+
+  let likeInfo: Awaited<ReturnType<typeof LikeService.getBulkLikeInfo>> = {};
+  if (db && reviews.length > 0) {
+    const reviewIds = reviews.map(r => r.id);
+    likeInfo = await LikeService.getBulkLikeInfo(db, reviewIds, userSession);
+  }
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+      year: 'numeric', month: 'numeric', day: 'numeric',
+      hour: '2-digit', minute: '2-digit'
     });
   };
 
-  const getBrainEmojis = (rating: number) => {
-    return '⭐'.repeat(rating);
-  };
+  const getBrainEmojis = (rating: number) => '⭐'.repeat(rating);
 
   if (reviews.length === 0) {
     return (
@@ -43,72 +49,47 @@ export default function ReviewList({ reviews, dramaId }: ReviewListProps) {
   return (
     <section className="reviews-section mb-l">
       <div className="retro-panel">
-        <div className="panel-header">
-          💬 みんなの感想 ({reviews.length}件)
-        </div>
+        <div className="panel-header">💬 みんなの感想 ({reviews.length}件)</div>
         <div className="panel-content">
           <div className="review-list">
             {reviews.map((review, index) => (
               <div key={review.id} className={`review-item ${index < reviews.length - 1 ? 'mb-m' : ''}`}>
-                {/* レビューヘッダー */}
                 <div className="review-header mb-s">
                   <div className="reviewer-info">
-                    <span className="reviewer-name font-bold color-primary">
-                      {review.nickname}
-                    </span>
+                    <span className="reviewer-name font-bold color-primary">{review.nickname}</span>
                     <span className="review-rating ml-m">
                       {getBrainEmojis(review.rating)}
-                      <span className="rating-text color-muted ml-s">
-                        ({review.rating}/5)
-                      </span>
+                      <span className="rating-text color-muted ml-s">({review.rating}/5)</span>
                     </span>
                   </div>
-                  <span className="review-date color-muted">
-                    {formatDate(review.created_at)}
-                  </span>
+                  <span className="review-date color-muted">{formatDate(review.created_at)}</span>
                 </div>
 
-                {/* レビューコンテンツ */}
                 {review.comment && (
                   <div className="review-content mb-s">
-                    <p className="review-text">
-                      {review.comment}
-                    </p>
+                    <p className="review-text">{review.comment}</p>
                   </div>
                 )}
 
-                {/* レビューアクション */}
                 <div className="review-actions">
-                  <LikeButton reviewId={review.id} />
-                  
-                  {/* バカ度レベル表示（2000年代風演出） */}
+                  <LikeButton 
+                    reviewId={review.id} 
+                    initialCount={likeInfo[review.id]?.count || 0}
+                    initialLiked={likeInfo[review.id]?.userLiked || false}
+                  />
                   <div className="baka-level ml-m">
-                    {review.rating === 5 && (
-                      <span className="baka-badge baka-max sparkle">🏆 バカ度MAX</span>
-                    )}
-                    {review.rating === 4 && (
-                      <span className="baka-badge baka-high">⭐ 重症</span>
-                    )}
-                    {review.rating === 3 && (
-                      <span className="baka-badge baka-mid">🙂 中等症</span>
-                    )}
-                    {review.rating === 2 && (
-                      <span className="baka-badge baka-low">😊 軽症</span>
-                    )}
-                    {review.rating === 1 && (
-                      <span className="baka-badge baka-min">😐 正常</span>
-                    )}
+                    {review.rating === 5 && <span className="baka-badge baka-max sparkle">🏆 バカ度MAX</span>}
+                    {review.rating === 4 && <span className="baka-badge baka-high">⭐ 重症</span>}
+                    {review.rating === 3 && <span className="baka-badge baka-mid">🙂 中等症</span>}
+                    {review.rating === 2 && <span className="baka-badge baka-low">😊 軽症</span>}
+                    {review.rating === 1 && <span className="baka-badge baka-min">😐 正常</span>}
                   </div>
                 </div>
 
-                {/* 区切り線（最後以外） */}
-                {index < reviews.length - 1 && (
-                  <hr className="review-divider mt-m" />
-                )}
+                {index < reviews.length - 1 && <hr className="review-divider mt-m" />}
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

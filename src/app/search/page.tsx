@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { DramaService } from '@/lib/supabase/dramas';
 import { Drama } from '@/lib/types/database';
 import Link from 'next/link';
 
@@ -12,11 +11,15 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  // 全ドラマデータを取得
+  // 全ドラマデータをAPIから取得
   useEffect(() => {
     const fetchAllDramas = async () => {
       try {
-        const dramas = await DramaService.getAll();
+        const response = await fetch('/api/dramas');
+        if (!response.ok) {
+          throw new Error('Failed to fetch dramas');
+        }
+        const dramas = await response.json();
         setAllDramas(dramas);
       } catch (error) {
         console.error('ドラマデータ取得エラー:', error);

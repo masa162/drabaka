@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { ReviewService } from '@/lib/supabase/reviews';
-import { ReviewInsert } from '@/lib/types/database';
 
 interface ReviewFormProps {
   dramaId: number;
@@ -36,15 +34,24 @@ export default function ReviewForm({ dramaId, onSuccess }: ReviewFormProps) {
         throw new Error('コメントは500文字以内で入力してください');
       }
 
-      const reviewData: ReviewInsert = {
-        drama_id: dramaId,
-        nickname: formData.nickname.trim(),
-        rating: formData.rating,
-        comment: formData.comment.trim() || undefined
-      };
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          drama_id: dramaId,
+          nickname: formData.nickname.trim(),
+          rating: formData.rating,
+          comment: formData.comment.trim() || null,
+        }),
+      });
 
-      await ReviewService.create(reviewData);
-      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'レビューの投稿に失敗しました。');
+      }
+
       // フォームリセット
       setFormData({
         nickname: '匿名ユーザー',

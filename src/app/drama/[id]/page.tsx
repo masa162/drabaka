@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import { DramaService } from '@/lib/supabase/dramas';
-import { ReviewService } from '@/lib/supabase/reviews';
+import { DramaService } from '@/lib/d1/dramas';
+import { ReviewService } from '@/lib/d1/reviews';
 import DramaDetail from '@/components/drama/DramaDetail';
 import ReviewList from '@/components/review/ReviewList';
 import DramaStats from '@/components/drama/DramaStats';
@@ -12,6 +12,12 @@ interface Props {
 }
 
 export default async function DramaPage({ params }: Props) {
+  const db = process.env.DB;
+  if (!db) {
+    console.error("Database connection not found.");
+    return notFound();
+  }
+
   const { id } = await params;
   const dramaId = parseInt(id);
 
@@ -19,11 +25,10 @@ export default async function DramaPage({ params }: Props) {
     notFound();
   }
 
-  // 並列でデータを取得
   const [drama, reviews, stats] = await Promise.all([
-    DramaService.getById(dramaId),
-    ReviewService.getByDramaId(dramaId),
-    ReviewService.getStats(dramaId)
+    DramaService.getById(db, dramaId),
+    ReviewService.getByDramaId(db, dramaId),
+    ReviewService.getStats(db, dramaId)
   ]);
 
   if (!drama) {
@@ -32,29 +37,21 @@ export default async function DramaPage({ params }: Props) {
 
   return (
     <div className="drama-page fade-in">
-      {/* ドラマ基本情報 */}
       <DramaDetail drama={drama} />
-      
-      {/* 統計情報 */}
       <DramaStats stats={stats} />
-      
-      {/* 簡単評価フォーム */}
       <QuickRating dramaId={dramaId} />
-      
-      {/* 詳細レビュー投稿フォーム */}
       <ReviewForm dramaId={dramaId} />
-      
-      {/* レビュー一覧 */}
       <ReviewList reviews={reviews} dramaId={dramaId} />
     </div>
   );
 }
 
-// 静的パス生成（ISR対応）
 export async function generateStaticParams() {
+  const db = process.env.DB;
+  if (!db) return [];
+
   try {
-    const dramas = await DramaService.getAll();
-    
+    const dramas = await DramaService.getAll(db);
     return dramas.map((drama) => ({
       id: drama.id.toString(),
     }));
@@ -64,26 +61,23 @@ export async function generateStaticParams() {
   }
 }
 
-// ISR設定（5分間キャッシュ）
 export const revalidate = 300;
 
-// メタデータ生成
 export async function generateMetadata({ params }: Props) {
+  const db = process.env.DB;
+  if (!db) return { title: 'データベース接続エラー' };
+
   const { id } = await params;
   const dramaId = parseInt(id);
   
   if (isNaN(dramaId)) {
-    return {
-      title: 'ドラマが見つかりません - ドラマバカ一代',
-    };
+    return { title: 'ドラマが見つかりません - ドラマバカ一代' };
   }
 
-  const drama = await DramaService.getById(dramaId);
+  const drama = await DramaService.getById(db, dramaId);
   
   if (!drama) {
-    return {
-      title: 'ドラマが見つかりません - ドラマバカ一代',
-    };
+    return { title: 'ドラマが見つかりません - ドラマバカ一代' };
   }
 
   return {

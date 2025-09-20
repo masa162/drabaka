@@ -1,14 +1,22 @@
-import { DramaService } from '@/lib/supabase/dramas';
-import { ReviewService } from '@/lib/supabase/reviews';
+import { DramaService } from '@/lib/d1/dramas';
+import { ReviewService } from '@/lib/d1/reviews';
 import Link from 'next/link';
 
 export default async function HomePage() {
+  const db = process.env.DB;
+  if (!db) {
+    // DB接続がない場合のエラーハンドリング
+    // ここでは空の配列を渡してページがクラッシュしないようにする
+    console.error("Database connection not found.");
+    return <div>データベース接続エラー</div>;
+  }
+
   // 実際のデータを取得
   const [featuredWeekly, featuredPopular, completedDramas, latestReviews] = await Promise.all([
-    DramaService.getFeaturedWeekly(),
-    DramaService.getFeaturedPopular(),
-    DramaService.getCompletedDramas(),
-    ReviewService.getLatest(3)
+    DramaService.getFeaturedWeekly(db),
+    DramaService.getFeaturedPopular(db),
+    DramaService.getCompletedDramas(db),
+    ReviewService.getLatest(db, 3)
   ]);
   
   return (
