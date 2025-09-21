@@ -8,7 +8,7 @@ import QuickRating from '@/components/review/QuickRating';
 import { LikeService } from '@/lib/d1/likes';
 import { getUserSession } from '@/lib/utils/session';
 
-export default async function DramaPage({ params }: { params: { id: string } }) {
+export default async function DramaPage({ params }: any) {
   const db = process.env.DB;
   const dramaId = parseInt(params.id);
 
@@ -60,9 +60,8 @@ export async function generateStaticParams() {
   }
 }
 
-/*
 // メタデータ生成
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: any) {
   const db = process.env.DB;
   const dramaId = parseInt(params.id);
 
@@ -81,4 +80,3 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     description: `${drama.title}のキャスト、あらすじ、レビュー。${drama.synopsis?.substring(0, 100)}...`,
   };
 }
-*/
