@@ -39,7 +39,7 @@ export default async function DramaPage({ params }: any) {
       <DramaStats stats={stats} />
       <DramaDetail drama={drama} />
       <QuickRating dramaId={drama.id} onSuccess={() => { /* revalidate */ }} />
-      <ReviewList reviews={reviews} likeInfo={likeInfo} />
+      <ReviewList reviews={reviews} likeInfo={likeInfo} dramaId={drama.id} />
     </div>
   );
 }
