@@ -5,7 +5,7 @@ export default function Header() {
         <h1 className="site-title">
           <span className="sparkle">🧠 ドラマバカ一代 📺</span>
         </h1>
-        <p className="site-subtitle">見すぎて頭おかしくなったヤツらの感想サイト</p>
+        <p className="site-subtitle">見すぎて頭おかしくなったヤツらの感想サイトtest</p>
       </div>
     </header>
   );
