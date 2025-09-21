@@ -8,11 +8,7 @@ import QuickRating from '@/components/review/QuickRating';
 import { LikeService } from '@/lib/d1/likes';
 import { getUserSession } from '@/lib/utils/session';
 
-interface Props {
-  params: { id: string };
-}
-
-export default async function DramaPage({ params }: Props) {
+export default async function DramaPage({ params }: { params: { id: string } }) {
   const db = process.env.DB;
   const dramaId = parseInt(params.id);
 
@@ -65,7 +61,7 @@ export async function generateStaticParams() {
 }
 
 // メタデータ生成
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: { params: { id: string } }) {
   const db = process.env.DB;
   const dramaId = parseInt(params.id);
 
