@@ -60,6 +60,7 @@ export async function generateStaticParams() {
   }
 }
 
+/*
 // メタデータ生成
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const db = process.env.DB;
@@ -80,3 +81,4 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     description: `${drama.title}のキャスト、あらすじ、レビュー。${drama.synopsis?.substring(0, 100)}...`,
   };
 }
+*/
