@@ -6,6 +6,7 @@ import { getUserSession } from '@/lib/utils/session';
 interface ReviewListProps {
   reviews: Review[];
   dramaId: number;
+  likeInfo: { [reviewId: string]: { count: number; userLiked: boolean; }; };
 }
 
 export default async function ReviewList({ reviews, dramaId }: ReviewListProps) {
