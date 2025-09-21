@@ -1,4 +1,3 @@
-
 import type { D1Database } from '@cloudflare/workers-types';
 import { Drama } from '../types/database';
 
@@ -42,7 +41,7 @@ export class DramaService {
   static async getCurrentDramasByDay(db: D1Database): Promise<{[key: string]: Drama[]}> {
     const stmt = db.prepare("SELECT * FROM dramas WHERE status = 'airing' ORDER BY air_day, timeslot");
     const { results } = await stmt.all<DramaFromDB>();
-    
+
     const dramasByDay: {[key: string]: Drama[]} = {
       '月曜日': [], '火曜日': [], '水曜日': [], '木曜日': [],
       '金曜日': [], '土曜日': [], '日曜日': [], 'その他': []
@@ -57,7 +56,7 @@ export class DramaService {
         dramasByDay['その他'].push(dramaConverted);
       }
     });
-    
+
     return dramasByDay;
   }
 

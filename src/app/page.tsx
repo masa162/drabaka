@@ -5,10 +5,7 @@ import Link from 'next/link';
 export default async function HomePage() {
   const db = process.env.DB;
   if (!db) {
-    // DB接続がない場合のエラーハンドリング
-    // ここでは空の配列を渡してページがクラッシュしないようにする
-    console.error("Database connection not found.");
-    return <div>データベース接続エラー</div>;
+    return <div>データベース接続エラー: 管理者に連絡してください。</div>;
   }
 
   // 実際のデータを取得

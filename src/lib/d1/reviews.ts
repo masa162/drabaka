@@ -1,4 +1,3 @@
-
 import type { D1Database } from '@cloudflare/workers-types';
 import { Review, ReviewInsert } from '../types/database';
 
@@ -36,19 +35,19 @@ export class ReviewService {
   }
 
   // 統計取得
-  static async getStats(db: D1Database, dramaId: number): Promise<{ 
-    total: number; 
-    average: number; 
-    brainEmojis: string; 
+  static async getStats(db: D1Database, dramaId: number): Promise<{
+    total: number;
+    average: number;
+    brainEmojis: string;
   }> {
     const stmt = db.prepare('SELECT COUNT(*) as total, AVG(rating) as average FROM reviews WHERE drama_id = ?');
     const stats = await stmt.bind(dramaId).first<{ total: number; average: number | null }>();
 
     const total = stats?.total || 0;
     const average = stats?.average || 0;
-    
-    return { 
-      total, 
+
+    return {
+      total,
       average: Math.round(average * 100) / 100,
       brainEmojis: '⭐'.repeat(Math.round(average))
     };

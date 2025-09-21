@@ -2,16 +2,14 @@ import { NextResponse } from 'next/server';
 import { ReviewService } from '@/lib/d1/reviews';
 import { ReviewInsert } from '@/lib/types/database';
 
-export const runtime = 'edge'; // Edge Runtimeを指定
-
 // POST /api/reviews
 export async function POST(request: Request) {
   const db = process.env.DB;
-  if (!db) {
-    return NextResponse.json({ error: 'Database connection not found.' }, { status: 500 });
-  }
 
   try {
+    if (!db) {
+      throw new Error("Database connection not found.");
+    }
     const body = await request.json();
 
     // バリデーション

@@ -1,16 +1,14 @@
 import { NextResponse } from 'next/server';
 import { DramaService } from '@/lib/d1/dramas';
 
-export const runtime = 'edge'; // Edge Runtimeを指定
-
 // GET /api/dramas
 export async function GET() {
   const db = process.env.DB;
-  if (!db) {
-    return NextResponse.json({ error: 'Database connection not found.' }, { status: 500 });
-  }
 
   try {
+    if (!db) {
+      throw new Error("Database connection not found.");
+    }
     const allDramas = await DramaService.getAll(db);
     return NextResponse.json(allDramas, { status: 200 });
 

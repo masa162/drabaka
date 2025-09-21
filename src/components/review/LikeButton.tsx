@@ -9,10 +9,10 @@ interface LikeButtonProps {
   initialLiked: boolean;
 }
 
-export default function LikeButton({ 
-  reviewId, 
-  initialCount, 
-  initialLiked 
+export default function LikeButton({
+  reviewId,
+  initialCount,
+  initialLiked
 }: LikeButtonProps) {
   const [likeCount, setLikeCount] = useState(initialCount);
   const [isLiked, setIsLiked] = useState(initialLiked);
@@ -31,11 +31,12 @@ export default function LikeButton({
       setError('セッションが無効です');
       return;
     }
-
-    if (loading) return;
-
     setLoading(true);
     setError(null);
+
+    // UIを即時反映
+    setIsLiked(!isLiked);
+    setLikeCount(prev => isLiked ? prev - 1 : prev + 1);
 
     try {
       const response = await fetch('/api/likes', {
@@ -43,9 +44,9 @@ export default function LikeButton({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          reviewId: reviewId, 
-          userSession: userSession 
+        body: JSON.stringify({
+          reviewId: reviewId,
+          userSession: userSession
         }),
       });
 
@@ -55,72 +56,45 @@ export default function LikeButton({
       }
 
       const result = await response.json();
-      
+
+      // サーバーからの正式な値で同期
       setIsLiked(result.liked);
       setLikeCount(result.likeCount);
-      
-      // 成功時のフィードバック（2000年代風演出）
-      if (result.liked) {
-        const button = document.querySelector(`[data-review-id="${reviewId}"] .like-button`);
-        if (button) {
-          button.classList.add('like-animation');
-          setTimeout(() => {
-            button.classList.remove('like-animation');
-          }, 600);
-        }
-      }
+
     } catch (error) {
       console.error('Error toggling like:', error);
       setError(error instanceof Error ? error.message : 'いいねに失敗しました');
+      // エラー時はUIを元に戻す
+      setIsLiked(isLiked);
+      setLikeCount(likeCount);
       setTimeout(() => setError(null), 3000);
     } finally {
       setLoading(false);
     }
   };
 
-  const getLikeButtonText = () => {
-    if (loading) return '処理中...';
-    return '👍 いいね';
-  };
-
   const getLikeButtonClass = () => {
-    let className = 'retro-button like-button';
-    if (isLiked) {
-      className += ' retro-button--primary like-button--active';
-    }
-    if (loading) {
-      className += ' like-button--loading';
-    }
-    return className;
+    let classes = 'retro-button like-button';
+    if (isLiked) classes += ' liked';
+    if (loading) classes += ' loading';
+    return classes;
   };
 
   return (
     <div className="like-button-container" data-review-id={reviewId}>
-      <button 
+      <button
         onClick={handleLikeClick}
         disabled={loading || !userSession}
         className={getLikeButtonClass()}
         title={isLiked ? 'いいねを取り消す' : 'いいねする'}
       >
-        {getLikeButtonText()} ({likeCount})
+        <span className="like-icon">{isLiked ? '❤️' : '🤍'}</span>
+        <span className="like-text">いいね</span>
+        {likeCount > 0 && (
+          <span className="like-count">{likeCount}</span>
+        )}
       </button>
-      
-      {error && (
-        <div className="like-error">
-          <span className="error-text">❌ {error}</span>
-        </div>
-      )}
-      
-      {likeCount > 0 && !loading && (
-        <div className="like-stats">
-          {likeCount >= 10 && (
-            <span className="like-milestone sparkle">🔥 人気レビュー！</span>
-          )}
-          {likeCount >= 5 && likeCount < 10 && (
-            <span className="like-milestone">⭐ 注目レビュー</span>
-          )}
-        </div>
-      )}
+      {error && <p className="error-message" style={{ fontSize: '12px', color: 'red', marginTop: '4px' }}>{error}</p>}
     </div>
   );
 }

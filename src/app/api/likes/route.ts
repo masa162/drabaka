@@ -1,16 +1,14 @@
 import { NextResponse } from 'next/server';
 import { LikeService } from '@/lib/d1/likes';
 
-export const runtime = 'edge'; // Edge Runtimeを指定
-
 // POST /api/likes
 export async function POST(request: Request) {
   const db = process.env.DB;
-  if (!db) {
-    return NextResponse.json({ error: 'Database connection not found.' }, { status: 500 });
-  }
 
   try {
+    if (!db) {
+      throw new Error("Database connection not found.");
+    }
     const body = await request.json();
 
     // バリデーション

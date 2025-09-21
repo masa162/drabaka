@@ -4,30 +4,26 @@ import { ReviewService } from '@/lib/d1/reviews';
 import DramaDetail from '@/components/drama/DramaDetail';
 import ReviewList from '@/components/review/ReviewList';
 import DramaStats from '@/components/drama/DramaStats';
-import ReviewForm from '@/components/review/ReviewForm';
 import QuickRating from '@/components/review/QuickRating';
-import type { D1Database } from '@cloudflare/workers-types';
-
-export const runtime = 'edge'; // Edge Runtimeを指定
+import { LikeService } from '@/lib/d1/likes';
+import { getUserSession } from '@/lib/utils/session';
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default async function DramaPage({ params }: Props) {
-  const db = process.env.DB as D1Database;
+  const db = process.env.DB;
+  const dramaId = parseInt(params.id);
+
   if (!db) {
-    console.error("Database connection not found.");
-    return notFound();
+    return <div>データベース接続エラー: 管理者に連絡してください。</div>;
   }
-
-  const { id } = await params;
-  const dramaId = parseInt(id);
-
   if (isNaN(dramaId)) {
     notFound();
   }
 
+  // 並列でデータを取得
   const [drama, reviews, stats] = await Promise.all([
     DramaService.getById(db, dramaId),
     ReviewService.getByDramaId(db, dramaId),
@@ -38,36 +34,53 @@ export default async function DramaPage({ params }: Props) {
     notFound();
   }
 
+  const userSession = getUserSession();
+  const reviewIds = reviews.map(r => r.id);
+  const likeInfo = await LikeService.getBulkLikeInfo(db, reviewIds, userSession);
+
   return (
-    <div className="drama-page fade-in">
-      <DramaDetail drama={drama} />
+    <div className="drama-detail-page">
       <DramaStats stats={stats} />
-      <QuickRating dramaId={dramaId} />
-      <ReviewForm dramaId={dramaId} />
-      <ReviewList reviews={reviews} dramaId={dramaId} />
+      <DramaDetail drama={drama} />
+      <QuickRating dramaId={drama.id} onSuccess={() => { /* revalidate */ }} />
+      <ReviewList reviews={reviews} likeInfo={likeInfo} />
     </div>
   );
 }
 
-export async function generateMetadata({ params }: Props) {
-  const db = process.env.DB as D1Database;
-  if (!db) return { title: 'データベース接続エラー' };
+// 静的パス生成（ISR対応）
+export async function generateStaticParams() {
+  const db = process.env.DB;
+  if (!db) return [];
 
-  const { id } = await params;
-  const dramaId = parseInt(id);
-  
-  if (isNaN(dramaId)) {
-    return { title: 'ドラマが見つかりません - ドラマバカ一代' };
+  try {
+    const dramas = await DramaService.getAll(db);
+    return dramas.map((drama) => ({
+      id: drama.id.toString(),
+    }));
+  } catch (error) {
+    console.error('Error generating static params for dramas:', error);
+    return [];
+  }
+}
+
+// メタデータ生成
+export async function generateMetadata({ params }: Props) {
+  const db = process.env.DB;
+  const dramaId = parseInt(params.id);
+
+  if (!db || isNaN(dramaId)) {
+    return { title: 'ドラマ情報' };
   }
 
   const drama = await DramaService.getById(db, dramaId);
-  
+
   if (!drama) {
-    return { title: 'ドラマが見つかりません - ドラマバカ一代' };
+    return { title: '見つかりませんでした' };
   }
 
   return {
-    title: `${drama.title} - ドラマバカ一代`,
-    description: drama.synopsis || `${drama.title}の感想・レビューをチェック！`,
+    title: `${drama.title} - ドラマ情報 | ドラマバカ一代`,
+    description: `${drama.title}のキャスト、あらすじ、レビュー。${drama.synopsis?.substring(0, 100)}...`,
   };
 }
