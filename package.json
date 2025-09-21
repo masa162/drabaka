@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "open-next build",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
@@ -24,7 +24,9 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "15.1.7",
-    "@cloudflare/workers-types": "^4.20240620.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "open-next": "latest",
+    "@opennextjs/cloudflare": "latest",
+    "wrangler": "latest"
   }
 }
